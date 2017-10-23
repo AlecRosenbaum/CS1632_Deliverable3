@@ -21,7 +21,7 @@ public class WebTest {
 	// Start at the home page for reddit for each test
 	@Before
 	public void setUp() throws Exception {
-		driver.get("https://www.reddit.com");
+		driver.get("https://cs1632ex.herokuapp.com/");
 	}
 
 	// Given that I am on the main page
