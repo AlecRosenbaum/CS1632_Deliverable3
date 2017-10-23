@@ -17,90 +17,91 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class WebTest {
 
 	static WebDriver driver = new HtmlUnitDriver();
+	final static String baseURL = "https://cs1632ex.herokuapp.com/";
 	
 	// Start at the home page for reddit for each test
 	@Before
 	public void setUp() throws Exception {
-		driver.get("https://cs1632ex.herokuapp.com/");
+		driver.get(baseURL);
 	}
 
-	// Given that I am on the main page
-	// When I view the title
-	// Then I see that it contains the word "reddit"
-	@Test
-	public void testShowsCorrectTitle() {
+	// // Given that I am on the main page
+	// // When I view the title
+	// // Then I see that it contains the word "reddit"
+	// @Test
+	// public void testShowsCorrectTitle() {
 		
-		// Simply check that the title contains the word "reddit"
+	// 	// Simply check that the title contains the word "reddit"
 		
-		String title = driver.getTitle();
-		assertTrue(title.contains("reddit"));
-	}
+	// 	String title = driver.getTitle();
+	// 	assertTrue(title.contains("reddit"));
+	// }
 	
-	// Given that I am on the main page
-	// When I view the Remember Me section
-	// Then I should see that it contains the phrase "remember me"
-	@Test
-	public void testHasRememberMe() {
+	// // Given that I am on the main page
+	// // When I view the Remember Me section
+	// // Then I should see that it contains the phrase "remember me"
+	// @Test
+	// public void testHasRememberMe() {
 		
-		// Check that there is a remember-me element
-		// that contains the text "remember me"
-		// If it does not exist, or text is incorrect, fail test
+	// 	// Check that there is a remember-me element
+	// 	// that contains the text "remember me"
+	// 	// If it does not exist, or text is incorrect, fail test
 		
-		try {
-			WebElement e = driver.findElement(By.id("remember-me"));
-			String elementText = e.getText();
-			assertTrue(elementText.contains("remember me"));
-		} catch (NoSuchElementException nseex) {
-			fail();
-		}
-	}
+	// 	try {
+	// 		WebElement e = driver.findElement(By.id("remember-me"));
+	// 		String elementText = e.getText();
+	// 		assertTrue(elementText.contains("remember me"));
+	// 	} catch (NoSuchElementException nseex) {
+	// 		fail();
+	// 	}
+	// }
 	
-	// Given that I am on the main page
-	// When I click on the "new" link
-	// Then I should be redirected to the "new" page
-	@Test
-	public void testSeeNewLinks() {
+	// // Given that I am on the main page
+	// // When I click on the "new" link
+	// // Then I should be redirected to the "new" page
+	// @Test
+	// public void testSeeNewLinks() {
 		
-		// find the "new" link and click on it
-		// The page you go to should include "newest submissions"
-		// in the title
+	// 	// find the "new" link and click on it
+	// 	// The page you go to should include "newest submissions"
+	// 	// in the title
 		
-		driver.findElement(By.linkText("new")).click();
-		String newPageTitle = driver.getTitle();
-		assertTrue(newPageTitle.contains("newest submissions"));
-	}
+	// 	driver.findElement(By.linkText("new")).click();
+	// 	String newPageTitle = driver.getTitle();
+	// 	assertTrue(newPageTitle.contains("newest submissions"));
+	// }
 	
-	// Given that I am on the main page
-	// And I am not logged in 
-	// When I try to login with an valid username and invalid password
-	// Then I am given the opportunity to reset the password
-	@Test
-	public void testBadPasswordResetLink() {
+	// // Given that I am on the main page
+	// // And I am not logged in 
+	// // When I try to login with an valid username and invalid password
+	// // Then I am given the opportunity to reset the password
+	// @Test
+	// public void testBadPasswordResetLink() {
 		
-		// Enter username "meow", password "meow"
+	// 	// Enter username "meow", password "meow"
 	    
-                // ENTER YOUR OWN USERNAME/INVALID PASSWORD HERE!
+ //                // ENTER YOUR OWN USERNAME/INVALID PASSWORD HERE!
 	    
-		// driver.findElement(By.name("user")).sendKeys("dasbill");
-		// driver.findElement(By.name("passwd")).sendKeys("meow");
+	// 	// driver.findElement(By.name("user")).sendKeys("dasbill");
+	// 	// driver.findElement(By.name("passwd")).sendKeys("meow");
 		
-		// Look for the submit button (in the login div) and click
-		// to attempt to login 
+	// 	// Look for the submit button (in the login div) and click
+	// 	// to attempt to login 
 		
-		WebElement loginDiv = driver.findElement(By.id("login_login-main"));
+	// 	WebElement loginDiv = driver.findElement(By.id("login_login-main"));
 		
-		WebElement submitButton = loginDiv.findElement(By.className("btn"));
-		submitButton.click();
+	// 	WebElement submitButton = loginDiv.findElement(By.className("btn"));
+	// 	submitButton.click();
 		
-		// Check that there is a link to reset password and it is visible
+	// 	// Check that there is a link to reset password and it is visible
 		
-		try {
-			WebElement resetPw = driver.findElement(By.linkText("reset password"));
-			assertTrue(resetPw.isDisplayed());
-		} catch (NoSuchElementException nseex) {
-			fail();
-		}
-	}
+	// 	try {
+	// 		WebElement resetPw = driver.findElement(By.linkText("reset password"));
+	// 		assertTrue(resetPw.isDisplayed());
+	// 	} catch (NoSuchElementException nseex) {
+	// 		fail();
+	// 	}
+	// }
 	
 	// The homepage shall display the text "Welcome, friend, to a land of pure calculation" as well as "Used for CS1632 Software Quality Assurance, taught by Bill Laboon"
 	
@@ -112,19 +113,19 @@ public class WebTest {
 		// Check for links + link location
 		try {
 			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
-			assertEquals("/", link.getAttribute("href"));
+			assertEquals(baseURL, link.getAttribute("href"));
 
-			driver.findElement(By.linkText("Factorial"));
-			assertEquals("/fact", link.getAttribute("href"));
+			link = driver.findElement(By.linkText("Factorial"));
+			assertEquals(baseURL + "fact", link.getAttribute("href"));
 			
-			driver.findElement(By.linkText("Fibonacci"));
-			assertEquals("/fig", link.getAttribute("href"));
+			link = driver.findElement(By.linkText("Fibonacci"));
+			assertEquals(baseURL + "fib", link.getAttribute("href"));
 			
-			driver.findElement(By.linkText("Hello"));
-			assertEquals("/hellp", link.getAttribute("href"));
+			link = driver.findElement(By.linkText("Hello"));
+			assertEquals(baseURL + "hello", link.getAttribute("href"));
 			
-			driver.findElement(By.linkText("Cathedral Pics"));
-			assertEquals("/cathy", link.getAttribute("href"));
+			link = driver.findElement(By.linkText("Cathedral Pics"));
+			assertEquals(baseURL + "cathy", link.getAttribute("href"));
 
 		} catch (NoSuchElementException nseex) {
 			fail();
