@@ -210,13 +210,25 @@ public class WebTest {
 		}
 	}
 
-	// The factorial page (/fact) shall allow a user to enter a positive integer from 1 to 100, and upon pressing submit, shall show to the user the factorial of the value (e.g. "Factorial of 5 is 120!").
+	// The factorial page (/fact) shall allow a user to enter a positive integer from 1 to 100,
+	// and upon pressing submit, shall show to the user the factorial of the
+	// value (e.g. "Factorial of 5 is 120!").
 	@Test
 	public void testFactPageHasInput() {
-		driver.get(baseURL + "fib");
+		driver.get(baseURL + "fact");
 		try {
 			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
 			assertNotNull(elem);
+
+			elem.sendKeys("5");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Factorial of 5 is 120!"));
+
 		} catch (Exception e) {
 			fail();
 		}
