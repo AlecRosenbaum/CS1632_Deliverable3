@@ -208,6 +208,195 @@ public class WebTest {
 		}
 	}
 
+	// The factorial page (/fact) shall allow a user to enter a positive integer from 1 to 100,
+	// and upon pressing submit, shall show to the user the factorial of the
+	// value (e.g. "Factorial of 5 is 120!").
+	@Test
+	public void testFactPage_000() {
+		driver.get(baseURL + "fact");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("5");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Factorial of 5 is 120!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// The Fibonacci page (/fib) shall allow a user to enter a positive integer from 1 to 100,
+	// and upon pressing submit, shall show to the user the Fibonnaci of the
+	// value (e.g. "Fibonacci of 5 is 8!").
+	@Test
+	public void testFibPage_000() {
+		driver.get(baseURL + "fib");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("5");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Fibonacci of 5 is 8!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// For both the Fibonacci and Factorial pages, if a user enters an invalid value of any kind,
+	// they shall be informed that the value is 1 (e.g., "Fibonacci of -100 is 1!")
+	@Test
+	public void testInvalidInput_000() {
+		driver.get(baseURL + "fact");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("-100");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Factorial of -100 is 1!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// For both the Fibonacci and Factorial pages, if a user enters an invalid value of any kind,
+	// they shall be informed that the value is 1 (e.g., "Fibonacci of -100 is 1!")
+	@Test
+	public void testInvalidInput_001() {
+		driver.get(baseURL + "fib");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("-100");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Fibonacci of -100 is 1!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// For both the Fibonacci and Factorial pages, if a user enters an invalid value of any kind,
+	// they shall be informed that the value is 1 (e.g., "Fibonacci of -100 is 1!")
+	@Test
+	public void testInvalidInput_002() {
+		driver.get(baseURL + "fib");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("asdf");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Fibonacci of asdf is 1!"));
+
+		} catch (Exception e) {
+			fail("input 'asdf' fails on Fibonacci page");
+		}
+	}
+
+	// For both the Fibonacci and Factorial pages, if a user enters an invalid value of any kind,
+	// they shall be informed that the value is 1 (e.g., "Fibonacci of -100 is 1!")
+	@Test
+	public void testInvalidInput_003() {
+		driver.get(baseURL + "fact");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("asdf");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Factorial of asdf is 1!"));
+
+		} catch (Exception e) {
+			fail("input 'asdf' fails on Factorial page");
+		}
+	}
+
+	// Accessing the hello page (/hello) with no trailing values in the URL shall display
+	// the message "Hello CS1632, from Prof. Laboon!".
+	@Test
+	public void testHelloNoInput_000() {
+		driver.get(baseURL + "hello");
+		try {
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Hello CS1632, from Prof. Laboon!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// If a trailing value is provided in the URL when accessing the /hello page, then the
+	// message shall display hello from that trailing value. For example, when accessing
+	// /hello/Jazzy, the system shall display "Hello CS1632, from Jazzy". This shall work
+	// for all input values.
+	@Test
+	public void testHelloInput_000() {
+		driver.get(baseURL + "hello/Jazzy");
+		try {
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Hello CS1632, from Jazzy"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// If a trailing value is provided in the URL when accessing the /hello page, then the
+	// message shall display hello from that trailing value. For example, when accessing
+	// /hello/Jazzy, the system shall display "Hello CS1632, from Jazzy". This shall work
+	// for all input values.
+	@Test
+	public void testHelloInput_001() {
+		driver.get(baseURL + "hello/Jazzy/NotJazzy");
+		try {
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Hello CS1632, from Jazzy/NotJazzy"));
+
+		} catch (Exception e) {
+			fail("'Jazzy/NotJazzy' not displayed properly");
+		}
+	}
+
 	// Given that I am on the cathy page
 	// There are 3 images in a numbered list
 	@Test
@@ -220,17 +409,4 @@ public class WebTest {
 		assertEquals(allImages.size() , 3);
 
 	}
-
-	// The factorial page (/fact) shall allow a user to enter a positive integer from 1 to 100, and upon pressing submit, shall show to the user the factorial of the value (e.g. "Factorial of 5 is 120!").
-
-	// The Fibonacci page (/fib) shall allow a user to enter a positive integer from 1 to 100, and upon pressing submit, shall show to the user the Fibonnaci of the value (e.g. "Fibonacci of 5 is 8!").
-
-	// For both the Fibonacci and Factorial pages, if a user enters an invalid value of any kind, they shall be informed that the value is 1 (e.g., "Fibonacci of -100 is 1!")
-
-	// Accessing the hello page (/hello) with no trailing values in the URL shall display the message "Hello CS1632, from Prof. Laboon!".
-
-	// If a trailing value is provided in the URL when accessing the /hello page, then the message shall display hello from that trailing value. For example, when accessing /hello/Jazzy, the system shall display "Hello CS1632, from Jazzy". This shall work for all input values.
-
-	// The Cathedral page (/cathy) shall display three images of the Cathedral of Learning in a numbered list.
-
 }
