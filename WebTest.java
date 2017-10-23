@@ -49,24 +49,20 @@ public class WebTest {
 	// Given that I am on the main page
 	// Verify that the following text is present:
 	// "Welcome, friend, to a land of pure calculation"
-	// "Used for CS1632 Software Quality Assurance, taught by Bill Laboon"
 	@Test
 	public void testShowsCorrectHomePageText_000() {
 				
 		String bodyText = driver.findElement(By.className("lead")).getText();
-		System.out.println(bodyText);
-		assertTrue(bodyText.contains("Welcome, friend, to a land of pure calculation"));
+		assertTrue(bodyText.contains("Welcome, friend,\nto a land of pure calculation"));
 	}
 
 	// Given that I am on the main page
 	// Verify that the following text is present:
-	// "Welcome, friend, to a land of pure calculation"
 	// "Used for CS1632 Software Quality Assurance, taught by Bill Laboon"
 	@Test
 	public void testShowsCorrectHomePageText_001() {
 				
-		String bodyText = driver.findElement(By.className("lead")).getText();
-		System.out.println(bodyText);	
+		String bodyText = driver.findElements(By.className("lead")).get(1).getText();
 		assertTrue(bodyText.contains("Used for CS1632 Software Quality Assurance, taught by Bill Laboon"));
 	}
 	
@@ -74,8 +70,124 @@ public class WebTest {
 	// When I view the header
 	// Then I see that it contains "new", "rising", and "top" links
 	@Test
-	public void testHasCorrectHeaderLinks() {
+	public void testHasCorrectHeaderLinks_000() {
 
+		// Check for links + link location
+		try {
+			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
+			assertEquals(baseURL, link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Factorial"));
+			assertEquals(baseURL + "fact", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Fibonacci"));
+			assertEquals(baseURL + "fib", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Hello"));
+			assertEquals(baseURL + "hello", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Cathedral Pics"));
+			assertEquals(baseURL + "cathy", link.getAttribute("href"));
+
+		} catch (NoSuchElementException nseex) {
+			fail();
+		}
+	}
+
+	// Given that I am on the factorial page
+	// When I view the header
+	// Then I see that it contains "new", "rising", and "top" links
+	@Test
+	public void testHasCorrectHeaderLinks_001() {
+
+		driver.get(baseURL+"/fact");
+		// Check for links + link location
+		try {
+			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
+			assertEquals(baseURL, link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Factorial"));
+			assertEquals(baseURL + "fact", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Fibonacci"));
+			assertEquals(baseURL + "fib", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Hello"));
+			assertEquals(baseURL + "hello", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Cathedral Pics"));
+			assertEquals(baseURL + "cathy", link.getAttribute("href"));
+
+		} catch (NoSuchElementException nseex) {
+			fail();
+		}
+	}
+
+	// Given that I am on the fib page
+	// When I view the header
+	// Then I see that it contains "new", "rising", and "top" links
+	@Test
+	public void testHasCorrectHeaderLinks_002() {
+
+		driver.get(baseURL+"/fib");
+		// Check for links + link location
+		try {
+			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
+			assertEquals(baseURL, link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Factorial"));
+			assertEquals(baseURL + "fact", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Fibonacci"));
+			assertEquals(baseURL + "fib", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Hello"));
+			assertEquals(baseURL + "hello", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Cathedral Pics"));
+			assertEquals(baseURL + "cathy", link.getAttribute("href"));
+
+		} catch (NoSuchElementException nseex) {
+			fail();
+		}
+	}
+
+	// Given that I am on the hello page
+	// When I view the header
+	// Then I see that it contains "new", "rising", and "top" links
+	@Test
+	public void testHasCorrectHeaderLinks_003() {
+
+		driver.get(baseURL+"/hello");
+		// Check for links + link location
+		try {
+			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
+			assertEquals(baseURL, link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Factorial"));
+			assertEquals(baseURL + "fact", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Fibonacci"));
+			assertEquals(baseURL + "fib", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Hello"));
+			assertEquals(baseURL + "hello", link.getAttribute("href"));
+
+			link = driver.findElement(By.linkText("Cathedral Pics"));
+			assertEquals(baseURL + "cathy", link.getAttribute("href"));
+
+		} catch (NoSuchElementException nseex) {
+			fail();
+		}
+	}
+
+	// Given that I am on the cathy page
+	// When I view the header
+	// Then I see that it contains "new", "rising", and "top" links
+	@Test
+	public void testHasCorrectHeaderLinks_004() {
+
+		driver.get(baseURL+"/cathy");
 		// Check for links + link location
 		try {
 			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
