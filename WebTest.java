@@ -398,14 +398,14 @@ public class WebTest {
 	}
 
 	// Given that I am on the cathy page
-	// There are 3 images in a numbered list
+	// There are 3 images that display
 	@Test
 	public void testHasCorrectNumCathies_000() {
 
 		driver.get(baseURL+"cathy");
-
+		List<WebElement> listElements = driver.findElements(By.xpath("//div[@class='jumbotron']/ol/li")); 
+		assertEquals(listElements.size() , 3);
 		List<WebElement> allImages = driver.findElements(By.tagName("img"));
-
 		assertEquals(allImages.size() , 3);
 
 	}
