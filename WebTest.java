@@ -37,24 +37,6 @@ public class WebTest {
 	}
 	
 	// Given that I am on the main page
-	// When I view the header
-	// Then I see that it contains "new", "rising", and "top" links
-	@Test
-	public void testHasCorrectHeaderLinks() {
-		
-		// Check for new, rising, and top links - if any of
-		// these is not found, fail the test
-		
-		try {
-			driver.findElement(By.linkText("new"));
-			driver.findElement(By.linkText("rising"));
-			driver.findElement(By.linkText("top"));
-		} catch (NoSuchElementException nseex) {
-			fail();
-		}
-	}
-	
-	// Given that I am on the main page
 	// When I view the Remember Me section
 	// Then I should see that it contains the phrase "remember me"
 	@Test
@@ -122,8 +104,33 @@ public class WebTest {
 	
 	// The homepage shall display the text "Welcome, friend, to a land of pure calculation" as well as "Used for CS1632 Software Quality Assurance, taught by Bill Laboon"
 	
+
 	// Every page shall include five links at the top, to "CS1632 D3 Home", "Factorial", "Fibonacci", "Hello", and "Cathedral Pics". These shall link to /, /fact, /fib, /hello, and /cathy, respectively.
-	
+	@Test
+	public void testHasCorrectHeaderLinks() {
+		
+		// Check for links + link location
+		try {
+			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
+			assertEquals("/", link.getAttribute("href"));
+
+			driver.findElement(By.linkText("Factorial"));
+			assertEquals("/fact", link.getAttribute("href"));
+			
+			driver.findElement(By.linkText("Fibonacci"));
+			assertEquals("/fig", link.getAttribute("href"));
+			
+			driver.findElement(By.linkText("Hello"));
+			assertEquals("/hellp", link.getAttribute("href"));
+			
+			driver.findElement(By.linkText("Cathedral Pics"));
+			assertEquals("/cathy", link.getAttribute("href"));
+
+		} catch (NoSuchElementException nseex) {
+			fail();
+		}
+	}
+
 	// The factorial page (/fact) shall allow a user to enter a positive integer from 1 to 100, and upon pressing submit, shall show to the user the factorial of the value (e.g. "Factorial of 5 is 120!").
 	
 	// The Fibonacci page (/fib) shall allow a user to enter a positive integer from 1 to 100, and upon pressing submit, shall show to the user the Fibonnaci of the value (e.g. "Fibonacci of 5 is 8!").
