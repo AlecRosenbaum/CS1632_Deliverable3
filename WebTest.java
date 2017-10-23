@@ -214,7 +214,7 @@ public class WebTest {
 	// and upon pressing submit, shall show to the user the factorial of the
 	// value (e.g. "Factorial of 5 is 120!").
 	@Test
-	public void testFactPageHasInput() {
+	public void testFactPage_001() {
 		driver.get(baseURL + "fact");
 		try {
 			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
@@ -232,11 +232,31 @@ public class WebTest {
 		} catch (Exception e) {
 			fail();
 		}
-		
-
 	}
 
-	// The Fibonacci page (/fib) shall allow a user to enter a positive integer from 1 to 100, and upon pressing submit, shall show to the user the Fibonnaci of the value (e.g. "Fibonacci of 5 is 8!").
+	// The Fibonacci page (/fib) shall allow a user to enter a positive integer from 1 to 100,
+	// and upon pressing submit, shall show to the user the Fibonnaci of the
+	// value (e.g. "Fibonacci of 5 is 8!").
+	@Test
+	public void testFibPage_001() {
+		driver.get(baseURL + "fib");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("5");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Fibonacci of 5 is 8!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
 
 	// For both the Fibonacci and Factorial pages, if a user enters an invalid value of any kind, they shall be informed that the value is 1 (e.g., "Fibonacci of -100 is 1!")
 
