@@ -14,7 +14,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  */
 
-public class RedditTest {
+public class WebTest {
 
 	static WebDriver driver = new HtmlUnitDriver();
 	
