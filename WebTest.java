@@ -49,24 +49,20 @@ public class WebTest {
 	// Given that I am on the main page
 	// Verify that the following text is present:
 	// "Welcome, friend, to a land of pure calculation"
-	// "Used for CS1632 Software Quality Assurance, taught by Bill Laboon"
 	@Test
 	public void testShowsCorrectHomePageText_000() {
 				
 		String bodyText = driver.findElement(By.className("lead")).getText();
-		System.out.println(bodyText);
-		assertTrue(bodyText.contains("Welcome, friend, to a land of pure calculation"));
+		assertTrue(bodyText.contains("Welcome, friend,\nto a land of pure calculation"));
 	}
 
 	// Given that I am on the main page
 	// Verify that the following text is present:
-	// "Welcome, friend, to a land of pure calculation"
 	// "Used for CS1632 Software Quality Assurance, taught by Bill Laboon"
 	@Test
 	public void testShowsCorrectHomePageText_001() {
 				
-		String bodyText = driver.findElement(By.className("lead")).getText();
-		System.out.println(bodyText);	
+		String bodyText = driver.findElements(By.className("lead")).get(1).getText();
 		assertTrue(bodyText.contains("Used for CS1632 Software Quality Assurance, taught by Bill Laboon"));
 	}
 	
