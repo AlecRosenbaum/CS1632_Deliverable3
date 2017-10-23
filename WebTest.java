@@ -304,6 +304,52 @@ public class WebTest {
 		}
 	}
 
+	// For both the Fibonacci and Factorial pages, if a user enters an invalid value of any kind,
+	// they shall be informed that the value is 1 (e.g., "Fibonacci of -100 is 1!")
+	@Test
+	public void testInvalidInput_002() {
+		driver.get(baseURL + "fib");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("asdf");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Fibonacci of asdf is 1!"));
+
+		} catch (Exception e) {
+			fail("input 'asdf' fails on Fibonacci page");
+		}
+	}
+
+	// For both the Fibonacci and Factorial pages, if a user enters an invalid value of any kind,
+	// they shall be informed that the value is 1 (e.g., "Fibonacci of -100 is 1!")
+	@Test
+	public void testInvalidInput_003() {
+		driver.get(baseURL + "fact");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("asdf");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Factorial of asdf is 1!"));
+
+		} catch (Exception e) {
+			fail("input 'asdf' fails on Factorial page");
+		}
+	}
+
 	// Accessing the hello page (/hello) with no trailing values in the URL shall display
 	// the message "Hello CS1632, from Prof. Laboon!".
 	@Test
@@ -335,7 +381,24 @@ public class WebTest {
 			fail();
 		}
 	}
-	
+
+	// If a trailing value is provided in the URL when accessing the /hello page, then the
+	// message shall display hello from that trailing value. For example, when accessing
+	// /hello/Jazzy, the system shall display "Hello CS1632, from Jazzy". This shall work
+	// for all input values.
+	@Test
+	public void testHelloInput_001() {
+		driver.get(baseURL + "hello/Jazzy/NotJazzy");
+		try {
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Hello CS1632, from Jazzy/NotJazzy"));
+
+		} catch (Exception e) {
+			fail("'Jazzy/NotJazzy' not displayed properly");
+		}
+	}
+
 	// The Cathedral page (/cathy) shall display three images of the Cathedral of Learning in a numbered list.
 
 }
