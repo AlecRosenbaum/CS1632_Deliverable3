@@ -1,14 +1,12 @@
 import static org.junit.Assert.*;
-
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
 import java.util.logging.*;
 import org.openqa.selenium.logging.*;
 import org.openqa.selenium.remote.*;
-
+import java.util.List;
 
 public class WebTest {
 
@@ -100,7 +98,7 @@ public class WebTest {
 	@Test
 	public void testHasCorrectHeaderLinks_001() {
 
-		driver.get(baseURL+"/fact");
+		driver.get(baseURL+"fact");
 		// Check for links + link location
 		try {
 			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
@@ -129,7 +127,7 @@ public class WebTest {
 	@Test
 	public void testHasCorrectHeaderLinks_002() {
 
-		driver.get(baseURL+"/fib");
+		driver.get(baseURL+"fib");
 		// Check for links + link location
 		try {
 			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
@@ -158,7 +156,7 @@ public class WebTest {
 	@Test
 	public void testHasCorrectHeaderLinks_003() {
 
-		driver.get(baseURL+"/hello");
+		driver.get(baseURL+"hello");
 		// Check for links + link location
 		try {
 			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
@@ -187,7 +185,7 @@ public class WebTest {
 	@Test
 	public void testHasCorrectHeaderLinks_004() {
 
-		driver.get(baseURL+"/cathy");
+		driver.get(baseURL+"cathy");
 		// Check for links + link location
 		try {
 			WebElement link = driver.findElement(By.linkText("CS1632 D3 Home"));
@@ -208,6 +206,19 @@ public class WebTest {
 		} catch (NoSuchElementException nseex) {
 			fail();
 		}
+	}
+
+	// Given that I am on the cathy page
+	// There are 3 images in a numbered list
+	@Test
+	public void testHasCorrectNumCathies_000() {
+
+		driver.get(baseURL+"cathy");
+
+		List<WebElement> allImages = driver.findElements(By.tagName("img"));
+
+		assertEquals(allImages.size() , 3);
+
 	}
 
 	// The factorial page (/fact) shall allow a user to enter a positive integer from 1 to 100, and upon pressing submit, shall show to the user the factorial of the value (e.g. "Factorial of 5 is 120!").
