@@ -232,6 +232,54 @@ public class WebTest {
 		}
 	}
 
+	// The factorial page (/fact) shall allow a user to enter a positive integer from 1 to 100,
+	// and upon pressing submit, shall show to the user the factorial of the
+	// value (e.g. "Factorial of 100 is 93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000!").
+	@Test
+	public void testFactPage_001() {
+		driver.get(baseURL + "fact");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("100");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Factorial of 100 is 93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// The factorial page (/fact) shall allow a user to enter a positive integer from 1 to 100,
+	// and upon pressing submit, shall show to the user the factorial of the
+	// value (e.g. "Factorial of 50 is 30414093201713378043612608166064768844377641568960512000000000000!").
+	@Test
+	public void testFactPage_002() {
+		driver.get(baseURL + "fact");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("50");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue(bodyText.contains("Factorial of 50 is 30414093201713378043612608166064768844377641568960512000000000000!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
 	// The Fibonacci page (/fib) shall allow a user to enter a positive integer from 1 to 100,
 	// and upon pressing submit, shall show to the user the Fibonnaci of the
 	// value (e.g. "Fibonacci of 5 is 8!").
@@ -250,6 +298,54 @@ public class WebTest {
 			// Check that there is the factorial output
 			String bodyText = driver.findElement(By.className("jumbotron")).getText();
 			assertTrue(bodyText.contains("Fibonacci of 5 is 8!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// The Fibonacci page (/fib) shall allow a user to enter a positive integer from 1 to 100,
+	// and upon pressing submit, shall show to the user the Fibonnaci of the
+	// value (e.g. "Fibonacci of 100 is 573147844013817084101!").
+	@Test
+	public void testFibPage_001() {
+		driver.get(baseURL + "fib");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("100");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue("Wrong Fibonacci Displayed!", bodyText.contains("Fibonacci of 100 is 573147844013817084101!"));
+
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	// The Fibonacci page (/fib) shall allow a user to enter a positive integer from 1 to 100,
+	// and upon pressing submit, shall show to the user the Fibonnaci of the
+	// value (e.g. "Fibonacci of 50 is 8!").
+	@Test
+	public void testFibPage_002() {
+		driver.get(baseURL + "fib");
+		try {
+			WebElement elem = driver.findElements(By.xpath("//input[@type='text']")).get(0);
+			assertNotNull(elem);
+
+			elem.sendKeys("50");
+
+			elem = driver.findElements(By.xpath("//input[@type='submit']")).get(0);
+			elem.click();
+
+			// Check that there is the factorial output
+			String bodyText = driver.findElement(By.className("jumbotron")).getText();
+			assertTrue("Wrong Fibonacci Displayed!", bodyText.contains("Fibonacci of 50 is 20365011074!"));
 
 		} catch (Exception e) {
 			fail();
@@ -397,8 +493,8 @@ public class WebTest {
 		}
 	}
 
-	// Given that I am on the cathy page
-	// There are 3 images that display
+	// If I am on the Cathy page I will be able to see 3 images
+	// which are contained within a list
 	@Test
 	public void testHasCorrectNumCathies_000() {
 
